@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="efris_product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_open_label_layout']" position="after">
+                 <button string="Update EFRIS On-hand"
+                    name="update_efris_onhand"
+                     class="oe_highlight"
+                    type="object"
+                    attrs="{'invisible': [('is_efris_synchronised','!=', True)]}"/>
+            </xpath>
+            <xpath expr="//div[@name='options']" position="inside">
+                <span class="d-inline-block">
+                    <field name="has_efris_sync" attrs="{'invisible':[('id','=',False)]}"/>
+                    <label for="has_efris_sync" attrs="{'invisible':[('id','=',False)]}"/>
+                </span>
+            </xpath>
+            <xpath expr="//notebook[1]/page[1]" position="after">
+                <page name="efris_catalogue" string="EFRIS Catalogue" attrs="{'invisible':[('has_efris_sync','=',False)]}">
+                    <group>
+                         <group>
+                            <field name="efris_item_name"
+                                   attrs="{'required':[('has_efris_sync','=',True)]}"/>
+                            <field name="efris_item_code"/>
+                            <field name="efris_goods_uom"
+                                   attrs="{'required':[('has_efris_sync','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="efris_goods_category_id"
+                                   attrs="{'required':[('has_efris_sync','=',True)]}"/>
+                            <field name="efris_unit_price"/>
+                            <field name="is_efris_synchronised"/>
+                        </group>
+                    </group>
+                    <button string="Sync with EFRIS"
+                        name="sync_with_efris"
+                        type="object"
+                        attrs="{'required':[('has_efris_sync','=',True)],
+                                'invisible': [('is_efris_synchronised','=', True)]
+                                }"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

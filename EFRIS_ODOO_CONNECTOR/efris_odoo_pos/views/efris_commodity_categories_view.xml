@@ -1,0 +1,81 @@
+<odoo>
+        <record id="efris_commodity_categories_model_action" model="ir.actions.act_window">
+            <field name="name">EFRIS Commodity Categories</field>
+            <field name="res_model">efris.commodity.categories</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+<!--form view-->
+        <record id="efris_commodity_categories_form_view" model="ir.ui.view">
+            <field name="model">efris.commodity.categories</field>
+            <field name="arch" type="xml">
+                <form string="efris.commodity.categories">
+                    <sheet>
+                         <div class="oe_title">
+                            <label for="name" string="Commodity Category"/>
+                            <h1><field name="name" placeholder="e.g. Lamps"/></h1>
+                        </div>
+                        <group name="first" col="2">
+                            <field name="parent_id" class="oe_inline"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="category_code"/>
+                                <field name="complete_name"/>
+                                <field name="parent_code"/>
+                                <field name="rate"/>
+                                <field name="is_leaf_node"/>
+                                <field name="enable_status_code"/>
+
+                            </group>
+                            <group>
+                                <field name="service_mark"/>
+                                <field name="is_zero_rate"/>
+                                <field name="commodity_category_Level"/>
+                                <field name="is_exempt"/>
+                                <field name="exclusion"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--tree-view-->
+        <record id="efris_commodity_categories_view_tree" model="ir.ui.view">
+            <field name="name">efris.commodity.categories.view.tree</field>
+            <field name="model">efris.commodity.categories</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="complete_name"/>
+                    <field name="category_code"/>
+                    <field name="enable_status_code"/>
+                </tree>
+            </field>
+        </record>
+<!--search_filter_view.-->
+    <record id="efris_commodity_categories_view_search" model="ir.ui.view">
+        <field name="name">efris.commodity.categories.view.search</field>
+        <field name="model">efris.commodity.categories</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="category_code"/>
+                <field name="complete_name"/>
+                <filter string="Partner" name="partner_name"/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="name"
+                            context="{'group_by': 'name'}"/>
+                    <filter string="Complete Name" name="complete_name"
+                            context="{'group_by': 'complete_name'}"/>
+                    <filter string="Category Code" name="category_code"
+                            context="{'group_by': 'category_code'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+
+        <menuitem id="efris_commodity_categories_model_menu_action"
+              action="efris_commodity_categories_model_action"
+              sequence="10"
+              parent="account.account_management_menu"/>
+</odoo>

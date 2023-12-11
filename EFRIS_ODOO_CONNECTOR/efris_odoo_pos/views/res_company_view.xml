@@ -1,0 +1,51 @@
+<odoo>
+<!--form view-->
+    <record id="res_company_form_view" model="ir.ui.view" >
+		<field name="name">res.company.view.form</field>
+		<field name="model">res.company</field>
+		<field name="inherit_id" ref="base.view_company_form" />
+		<field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="get_efris_authentication"
+                        string="EFRIS Authentication"
+                        type="object"
+                        attrs="{'invisible':[('efris_enable', '=', False)]}"
+                        class="oe_highlight"/>
+                </header>
+            </xpath>
+            <notebook position="inside">
+				<page string="EFRIS Configuration" autofocus="autofocus">
+                    <group>
+                        <field name="efris_enable"/>
+                    </group>
+                    <group string="AUTHENTICATION DETAILS" attrs="{'invisible':[('efris_enable', '=', False)]}">
+                        <group>
+                            <field name="login_tin" attrs="{'required':[('efris_enable','=',True)]}"/>
+                            <field name="login_password"/>
+                            <field name="device_no" attrs="{'required':[('efris_enable','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="is_authenticated"/>
+                            <field name="api_url" attrs="{'required':[('efris_enable','=',True)]}"/>
+                        </group>
+                    </group><br/>
+                    <group string="COMPANY DETAILS" attrs="{'invisible':[('efris_enable', '=', False)]}">
+                        <group>
+                            <field name="tax_payer_id"/>
+                            <field name="legal_name"/>
+                            <field name="business_name"/>
+                            <field name="business_place"/>
+                        </group>
+                        <group>
+                            <field name="branch_id"/>
+                            <field name="branch_code"/>
+                            <field name="branch_name"/>
+                            <field name="credit_max"/>
+                        </group>
+                    </group>
+				</page>
+			</notebook>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_efris_commodity_categories,access.efris.commodity.categories,model_efris_commodity_categories,base.group_user,1,1,1,1
+access_efris_product_uom,access.efris.product.uom,model_efris_product_uom,base.group_user,1,1,1,1
+access_efris_onhand_wizard,access.efris.onhand.wizard,model_efris_onhand_wizard,base.group_user,1,1,1,1

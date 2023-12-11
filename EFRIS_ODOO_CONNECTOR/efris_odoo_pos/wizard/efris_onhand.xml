@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="efris_onhand_view_form_wizard" model="ir.ui.view">
+        <field name="name">efris.onhand.wizard.form</field>
+        <field name="model">efris.onhand.wizard</field>
+        <field name="arch" type="xml">
+            <form string="efris.onhand.wizard">
+                <group>
+                    <group>
+                        <field name="product_name"/>
+                        <field name="product_code"/>
+                        <field name="update_type" widget="radio" />
+                        <field name="product_onhand"/>
+                    </group>
+                    <group>
+                        <field name="unit_price"/>
+                        <field name="efris_goods_uom"/>
+                        <field name="commodity_categ_id"/>
+                        <field name="reduce_reason" attrs="{'invisible': [('update_type', '=', 'increase')],
+                         'required': [('update_type', '!=', 'increase')]}"/>
+                        <field name="remarks" attrs="{'invisible': [('reduce_reason','!=','104')],
+                        'required': [('reduce_reason','=','104')]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="goods_quantity_update"
+                            string="Increase Quantity"
+                            type="object"
+                            attrs="{'invisible': [('update_type', '=', 'decrease')]}"
+                            class="btn-primary"/>
+                    <button name="goods_quantity_reduce"
+                            string="Reduce Quantity"
+                            type="object"
+                            attrs="{'invisible': [('update_type', '=', 'increase')]}"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

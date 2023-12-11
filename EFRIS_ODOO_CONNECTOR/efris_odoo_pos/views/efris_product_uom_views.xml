@@ -1,0 +1,23 @@
+<odoo>
+        <record id="efris_product_uom_model_action" model="ir.actions.act_window">
+            <field name="name">EFRIS Goods UOM</field>
+            <field name="res_model">efris.product.uom</field>
+            <field name="view_mode">tree</field>
+        </record>
+    <!--tree-view-->
+        <record id="efris_product_uom_view_tree" model="ir.ui.view">
+            <field name="name">efris.product.uom.view.tree</field>
+            <field name="model">efris.product.uom</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="value"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+    <menuitem id="efris_product_uom_model_menu_action"
+              action="efris_product_uom_model_action"
+              sequence="12"
+              parent="account.account_management_menu"/>
+</odoo>

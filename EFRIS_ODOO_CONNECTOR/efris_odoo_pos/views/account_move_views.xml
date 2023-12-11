@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="invoice_form_inherited" model="ir.ui.view" >
+		<field name="name">account.move.view.form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_reverse']" position="after">
+                 <button string="Cancel EFRIS Credit Note"
+                    name="get_efris_credit_note_cancel"
+                     class="oe_highlight"
+                    type="object"
+                    attrs="{'invisible': ['|',('is_efris_reversal','=', False),
+										('is_efris_credit_cancel','=',True)]}"/>
+            </xpath>
+
+			<xpath expr="//notebook/page[@name='invoice_tab']/field/tree/field[@name='price_unit']"
+				   position='after'>
+                <field name="efris_unit_price" readonly="1" attrs="{'invisible': [('is_efris_product','=', False)]}"/>
+                <field name="is_efris_product" readonly="1" invisible="1"/>
+            </xpath>
+
+			<notebook position="inside">
+				<page string="EFRIS Info">
+					<group>
+						<group string="INVOICE DETAILS">
+							<field name="efris_invoiceno"/>
+							<field name="efris_invoiceid"/>
+							<field name="is_authenticated"/>
+							<field name="is_efris_reversal"/>
+<!--							attrs="{'invisible': [('reversed_entry_id','=', False)]-->
+<!--                            }"/>-->
+						</group>
+						<group string="FDN DETAILS">
+							<field name="fdn_no"/>
+							<field name="orig_fdn_no"/>
+							<field name="verification_code"/>
+
+						</group>
+						<group string="EFRIS QR CODE">
+							<field name="efris_qr_code"
+								   widget='image'
+								   class="oe_avatar" />
+						</group>
+
+						<group string="CREDIT NOTE DETAILS">
+							<field name="efris_referenceno" />
+							<field name="credit_note_application_id"/>
+							<field name="efris_refund_reason" invisible="1"/>
+							<field name="credit_note_task_id"/>
+							<field name="credit_note_remark"/>
+							<field name="is_efris_credit_cancel"/>
+						</group>
+
+					</group>
+
+<!--					<button string="Approve Credit Note"-->
+<!--                    name="get_efris_credit_note_approval"-->
+<!--                    type="object"/>-->
+				</page>
+			</notebook>
+		</field>
+	</record>
+</odoo>

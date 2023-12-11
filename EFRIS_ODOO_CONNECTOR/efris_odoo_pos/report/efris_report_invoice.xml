@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_inherit_efris"
+              inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='payment_communication']"
+               position="before">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div t-if="o.efris_qr_code"
+                 t-field="o.efris_qr_code"
+                 t-options="{'widget': 'image', 'width': 150, 'height': 150}"/>
+            <p t-if="o.fdn_no">
+                <strong>FDN No:</strong>
+                <span  t-field="o.fdn_no"/>
+            </p>
+            <p t-if="o.orig_fdn_no">
+                <strong>Original FDN No:</strong>
+                <span  t-field="o.orig_fdn_no"/>
+            </p>
+            <p t-if="o.verification_code">
+                <strong>Verification Code:</strong>
+                <span t-field="o.verification_code"/>
+            </p><br/>
+        </xpath>
+    </template>
+</odoo>

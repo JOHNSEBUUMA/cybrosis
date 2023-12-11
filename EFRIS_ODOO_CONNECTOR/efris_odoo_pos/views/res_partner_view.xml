@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<!-- res.partner inherit form view -->
+    <record id="odoo_efris_pos_view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.inherit.view.form.odoo.efris</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="partner_type"/>
+                <field name="taxpayer_type"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

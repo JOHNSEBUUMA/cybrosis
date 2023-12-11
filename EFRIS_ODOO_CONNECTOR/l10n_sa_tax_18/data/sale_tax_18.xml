@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Demo 18% Tax-->
+    <record id="efris_tax_18_percent" model="account.tax">
+        <field name="name">EFRIS URA (18%) Sales Tax</field>
+        <field name="sequence">200</field>
+        <field name="type_tax_use">sale</field>
+        <field name="amount">18.0</field>
+        <field name="amount_type">percent</field>
+        <field name="active">True</field>
+        <field name="country_id" eval="ref('base.ug')"/>
+    </record>
+</odoo>
